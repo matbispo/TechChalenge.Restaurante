@@ -11,6 +11,8 @@ namespace Domain.Entities
 
         public OrderStatus OrderStatus { get; set; }
 
+        public DateTime RequestDate { get; set; }
+
         public bool IsDeleted { get; set; }
 
         public Order()

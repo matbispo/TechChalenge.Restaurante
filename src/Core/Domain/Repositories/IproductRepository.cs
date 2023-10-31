@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.ValueObjects;
 
 namespace Domain.Repositories
 {
@@ -8,7 +9,7 @@ namespace Domain.Repositories
 
         Product? GetProductById(long productId);
 
-        IList<Product?> GetProductByCategory(long ProductCategoty);
+        IList<Product?> GetProductByCategory(ProductCategory ProductCategoty);
         Product? UpdateProduct(Product product);
 
         void DeleteProduct(long productId);

@@ -8,5 +8,12 @@ namespace Domain.Entities
         public string Name{ get; set; }
         public string Email{ get; set; }
         public CPF Cpf { get; set; }
+
+        public IList<Order> Orders { get; set; }
+
+        public Customer()
+        {
+            Orders = new List<Order>();
+        }
     }
 }

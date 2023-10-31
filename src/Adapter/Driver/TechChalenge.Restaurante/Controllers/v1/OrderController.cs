@@ -8,13 +8,13 @@ namespace TechChalenge.Restaurante.Controllers.v1
         [HttpGet]
         public IActionResult ListOrders()
         {
-
+            return Ok();
         }
 
         [HttpPost]
         public IActionResult CreateOrder(Order order)
         {
-
+            return Ok();
         }
     }
 }

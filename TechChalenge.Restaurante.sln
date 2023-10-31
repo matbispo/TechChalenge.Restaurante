@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChalenge.Restaurante", "TechChalenge.Restaurante\TechChalenge.Restaurante.csproj", "{EF159894-0E4D-4D3D-A647-72E12960F0FD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9C2DA3B7-20AD-4F52-BFD2-60CC9D8FF0E0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E2B008DA-3CF4-4117-90A2-F825DC96C0C1}"
@@ -17,11 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Driver", "Driver", "{D6860F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{6EDE87C0-2C82-4EFB-B296-19401DF15EB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra", "Infra\Infra.csproj", "{3C837529-6FC0-4AE7-856A-534AC7202E1B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChalenge.Restaurante", "src\Adapter\Driver\TechChalenge.Restaurante\TechChalenge.Restaurante.csproj", "{EF159894-0E4D-4D3D-A647-72E12960F0FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{2ED81DAA-E945-4ABB-918E-434E88E4905C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra", "src\Adapter\Driven\Infra\Infra.csproj", "{3C837529-6FC0-4AE7-856A-534AC7202E1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{23EA143C-36E6-427A-A350-759C05E39954}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Core\Application\Application.csproj", "{2ED81DAA-E945-4ABB-918E-434E88E4905C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Core\Domain\Domain.csproj", "{23EA143C-36E6-427A-A350-759C05E39954}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChallenge.Tests", "tests\TechChallenge.Tests\TechChallenge.Tests.csproj", "{C656AB0B-8BE0-47D3-9483-35E32B213A9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{23EA143C-36E6-427A-A350-759C05E39954}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23EA143C-36E6-427A-A350-759C05E39954}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23EA143C-36E6-427A-A350-759C05E39954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C656AB0B-8BE0-47D3-9483-35E32B213A9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C656AB0B-8BE0-47D3-9483-35E32B213A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C656AB0B-8BE0-47D3-9483-35E32B213A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C656AB0B-8BE0-47D3-9483-35E32B213A9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{3C837529-6FC0-4AE7-856A-534AC7202E1B} = {EBA73282-1A96-404F-9AF3-6795F680FB13}
 		{2ED81DAA-E945-4ABB-918E-434E88E4905C} = {6EDE87C0-2C82-4EFB-B296-19401DF15EB1}
 		{23EA143C-36E6-427A-A350-759C05E39954} = {6EDE87C0-2C82-4EFB-B296-19401DF15EB1}
+		{C656AB0B-8BE0-47D3-9483-35E32B213A9B} = {E2B008DA-3CF4-4117-90A2-F825DC96C0C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {743133FC-033B-4C8E-B054-0886C52ED1B1}

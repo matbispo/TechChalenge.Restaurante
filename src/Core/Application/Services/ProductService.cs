@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Repositories;
 using Domain.Services;
+using Domain.ValueObjects;
 
 namespace Application.Services
 {
@@ -23,7 +24,7 @@ namespace Application.Services
             _productRepository.DeleteProduct(productId);
         }
 
-        public IList<Product?> GetProductByCategory(long ProductCategoty)
+        public IList<Product?> GetProductByCategory(ProductCategory ProductCategoty)
         {
             return _productRepository.GetProductByCategory(ProductCategoty);
         }
