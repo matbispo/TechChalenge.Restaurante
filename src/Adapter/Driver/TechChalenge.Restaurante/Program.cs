@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Infra.Context;
+using Application.ServiceCollection;
+using Infra.ServiceCollection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("TechChallengeCs");
 
 builder.Services.AddDbContext<TechChallengeDbContext>(o => o.UseSqlServer(connectionString));
+
+builder.Services.AddApplicationServices();
+builder.Services.AddRepositoryServices();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
