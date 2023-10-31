@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TechChalenge.Restaurante.Controllers.v1
 {
+    [Route("v1/api/customer")]
+    [ApiController]
     public class CustomerController : Controller
     {
         private readonly ILogger<CustomerController> _logger;
@@ -18,22 +20,27 @@ namespace TechChalenge.Restaurante.Controllers.v1
         [HttpPost]
         public IActionResult CreateCustomer([FromBody] Customer customer)
         {
-            return View();
+            return CreatedAtAction(nameof(GetCustomerByCpf), new { customerCpf = customer.Cpf }, customer);
         }
 
-        [HttpGet]
-        public Customer GetCustomerByCpf([FromQuery] string customerCpf)
+        [HttpGet("{customerCpf}")]
+        public IActionResult GetCustomerByCpf(string customerCpf)
         {
             try
             {
+                var customer = _customerService.GetCustomerByCpf(customerCpf);
+
+                if (customer is null)
+                    return NoContent();
+
+                return Ok(customer);
 
             }
             catch (Exception ex)
             {
-
-                throw;
+                _logger.LogError(ex, "");
+                return Problem();
             }
-            return View();
         }
     }
 }
