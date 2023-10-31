@@ -20,7 +20,17 @@ namespace TechChalenge.Restaurante.Controllers.v1
         [HttpPost]
         public IActionResult CreateCustomer([FromBody] Customer customer)
         {
-            return CreatedAtAction(nameof(GetCustomerByCpf), new { customerCpf = customer.Cpf }, customer);
+            try
+            {
+                _customerService.CreateCustomer(customer);
+
+                return CreatedAtAction(nameof(GetCustomerByCpf), new { customerCpf = customer.Cpf }, customer);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "");
+                return Problem();
+            }
         }
 
         [HttpGet("{customerCpf}")]

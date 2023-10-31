@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TechChalenge.Restaurante.Controllers.v1
 {
+    [Route("v1/api/order")]
+    [ApiController]
     public class OrderController : Controller
     {
         [HttpGet]

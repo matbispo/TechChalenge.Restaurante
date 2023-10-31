@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TechChalenge.Restaurante.Controllers.v1
 {
-
+    [Route("v1/api/product")]
+    [ApiController]
     public class ProductController : Controller
     {
         private readonly ILogger<ProductController> _logger;

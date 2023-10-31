@@ -42,33 +42,9 @@ namespace Infra.Context
 
             });
 
-            modelBuilder.Entity<Order>(e =>
+            modelBuilder.Entity<Product>(e =>
             {
-                e.HasKey(tc=> tc.Id);
-
-                e.Property(tc => tc.OrderStatus)
-                .IsRequired();
-
-                e.Property(tc => tc.RequestDate)
-                .HasColumnName("Request_Date")
-                .IsRequired();
-
-                e.HasMany(tc => tc.Products)
-                .WithOne()
-                .HasForeignKey(f => f.Id);
-
-                e.HasOne(tc => tc.Customer)
-                .WithMany(a=> a.Orders)
-                .HasForeignKey(x=> x.Customer.Id);
-
-                //e.HasOne(tc => tc.Customer)
-                //.WithMany()
-                //.HasForeignKey(x => x.Customer.Id);
-            });
-
-            modelBuilder.Entity<Product>( e=>
-            { 
-                e.HasKey(tc=>tc.Id);
+                e.HasKey(tc => tc.Id);
 
                 e.Property(tc => tc.Name)
                 .IsRequired()
@@ -87,6 +63,33 @@ namespace Infra.Context
 
                 e.Property(tc => tc.Category)
                 .IsRequired();
+            });
+
+            modelBuilder.Entity<Order>(e =>
+            {
+                e.HasKey(tc=> tc.Id);
+
+                e.Property(tc => tc.RequestDate)
+                .HasColumnName("Request_Date")
+                .IsRequired();
+
+                e.Property(tc => tc.TotalPrice)
+                .HasColumnType("decimal")
+                .IsRequired();
+
+                e.Property(tc => tc.OrderStatus)
+                .IsRequired();
+
+                e.Property(tc => tc.IsDeleted).IsRequired();
+
+                e.HasOne(tc => tc.Customer)
+                 .WithMany(x => x.Orders)
+                 .HasForeignKey(x=> x.CustomerId);
+            });
+
+            modelBuilder.Entity<OrderProduct>(e => 
+            {
+                e.HasKey(p=> new { p.OrderId, p.ProductId});
             });
         }
     }

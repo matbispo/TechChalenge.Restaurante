@@ -1,18 +1,26 @@
 ﻿using Domain.Aplication;
 using Domain.Entities;
+using Domain.Repositories;
 
 namespace Application.Services
 {
     internal class CustomerService : ICustomerService
     {
-        public void CreateCustomer(Customer customer)
+        private readonly ICustomerRepository _customerRespository;
+
+        public CustomerService(ICustomerRepository customerRespository)
         {
-            throw new NotImplementedException();
+            _customerRespository = customerRespository;
         }
 
-        public Customer GetCustomerByCpf(string customerCpf)
+        public void CreateCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerRespository.CreateCustomer(customer);
+        }
+
+        public Customer? GetCustomerByCpf(string customerCpf)
+        {
+            return _customerRespository.GetCustomerByCpf(customerCpf);
         }
     }
 }

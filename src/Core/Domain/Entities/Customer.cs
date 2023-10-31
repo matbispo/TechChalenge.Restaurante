@@ -7,13 +7,13 @@ namespace Domain.Entities
         public long Id { get; set; }
         public string Name{ get; set; }
         public string Email{ get; set; }
-        public CPF Cpf { get; set; }
+        public string Cpf { get; set; }
 
-        public IList<Order> Orders { get; set; }
+        public virtual IList<Order> Orders { get; set; }
 
-        public Customer()
-        {
-            Orders = new List<Order>();
-        }
+        //public Customer()
+        //{
+        //    Orders = new List<Order>();
+        //}
     }
 }
