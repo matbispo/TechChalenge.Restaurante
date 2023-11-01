@@ -8,8 +8,11 @@ namespace Domain.Repositories
         long CreateProduct(Product product);
 
         IList<Product?> GetProductByCategory(ProductCategory ProductCategoty);
+
         void UpdateProduct(long productId, Product product);
 
         void DeleteProduct(long productId);
+
+        IList<Product> GetProductsById(IList<long>ids);
     }
 }

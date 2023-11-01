@@ -1,6 +1,6 @@
-﻿using Domain.Entities;
+﻿using Application.Services.Interfaces;
+using Domain.Entities;
 using Domain.Repositories;
-using Domain.Services;
 using Domain.ValueObjects;
 
 namespace Application.Services

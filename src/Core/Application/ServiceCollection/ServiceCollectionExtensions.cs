@@ -1,6 +1,5 @@
 ﻿using Application.Services;
-using Domain.Aplication;
-using Domain.Services;
+using Application.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.ServiceCollection

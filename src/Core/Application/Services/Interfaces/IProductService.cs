@@ -1,8 +1,7 @@
-﻿
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.ValueObjects;
 
-namespace Domain.Services
+namespace Application.Services.Interfaces
 {
     public interface IProductService
     {
