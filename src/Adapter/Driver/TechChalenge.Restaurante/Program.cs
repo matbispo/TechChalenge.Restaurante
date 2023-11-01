@@ -9,10 +9,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-var connectionString = builder.Configuration.GetConnectionString("tecgCHallengeDb");
-
-builder.Services.AddDbContext<TechChallengeDbContext>(o => o.UseSqlServer(connectionString));
-
 builder.Services.AddApplicationServices();
 builder.Services.AddRepositoryServices();
 
@@ -42,11 +38,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
-//using (var scope = app.Services.CreateScope())
-//{
-//    var db = scope.ServiceProvider.GetRequiredService<TechChallengeDbContext>();
-//    db.Database.Migrate();
-//}
 
 app.Run();

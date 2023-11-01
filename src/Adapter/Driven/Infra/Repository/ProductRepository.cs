@@ -7,17 +7,10 @@ namespace Infra.Repository
 {
     internal class ProductRepository : IproductRepository
     {
-        private readonly TechChallengeDbContext _context;
-
-        public ProductRepository(TechChallengeDbContext context)
-        {
-            _context = context;
-        }
 
         public void CreateProduct(Product product)
         {
-            _context.Product.Add(product);
-            _context.SaveChanges();
+
         }
 
         public void DeleteProduct(long productId)
@@ -27,12 +20,12 @@ namespace Infra.Repository
 
         public IList<Product?>? GetProductByCategory(ProductCategory ProductCategoty)
         {
-            return _context.Product.Where(x => x.Category == ProductCategoty).ToList();
+            throw new NotImplementedException();
         }
 
         public Product? GetProductById(long productId)
         {
-            return _context.Product.Where(x => x.Id == productId).FirstOrDefault();
+            throw new NotImplementedException();
         }
 
         public Product? UpdateProduct(Product product)
