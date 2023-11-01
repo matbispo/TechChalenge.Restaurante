@@ -22,9 +22,9 @@ namespace TechChalenge.Restaurante.Controllers.v1
         {
             try
             {
-                _customerService.CreateCustomer(customer);
+                var id = _customerService.CreateCustomer(customer);
 
-                return CreatedAtAction(nameof(GetCustomerByCpf), new { customerCpf = customer.Cpf }, customer);
+                return Ok(new { CustomerId = id});
             }
             catch (Exception ex)
             {

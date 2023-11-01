@@ -35,8 +35,8 @@ namespace TechChalenge.Restaurante.Controllers.v1
 
         }
 
-        [HttpGet]
-        public IActionResult GetProductById([FromQuery] long productId)
+        [HttpGet("getproductbyid/{productId}")]
+        public IActionResult GetProductById(long productId)
         {
             try
             {
@@ -51,8 +51,8 @@ namespace TechChalenge.Restaurante.Controllers.v1
             }
         }
 
-        [HttpGet]
-        public IActionResult GetProductByCategory([FromQuery] ProductCategory ProductCategoty)
+        [HttpGet("getproductbycategory/{productId}")]
+        public IActionResult GetProductByCategory(ProductCategory ProductCategoty)
         {
             try
             {

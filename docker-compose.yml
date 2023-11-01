@@ -1,6 +1,7 @@
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: techchallenge-db
     environment:
       SA_PASSWORD: "TechChallenge#2023"
       ACCEPT_EULA: "Y"

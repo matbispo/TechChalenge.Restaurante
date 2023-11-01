@@ -4,7 +4,7 @@ namespace Domain.Aplication
 {
     public interface ICustomerService
     {
-        void CreateCustomer(Customer customer);
+        long CreateCustomer(Customer customer);
         Customer GetCustomerByCpf(string customerCpf);
     }
 }

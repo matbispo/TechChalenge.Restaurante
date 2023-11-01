@@ -13,9 +13,9 @@ namespace Application.Services
             _customerRespository = customerRespository;
         }
 
-        public void CreateCustomer(Customer customer)
+        public long CreateCustomer(Customer customer)
         {
-            _customerRespository.CreateCustomer(customer);
+            return _customerRespository.CreateCustomer(customer);
         }
 
         public Customer? GetCustomerByCpf(string customerCpf)

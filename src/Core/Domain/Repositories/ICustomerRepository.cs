@@ -5,7 +5,7 @@ namespace Domain.Repositories
 {
     public interface ICustomerRepository
     {
-        void CreateCustomer(Customer customer);
+        long CreateCustomer(Customer customer);
         Customer? GetCustomerByCpf(string customerCpf);
     }
 }
