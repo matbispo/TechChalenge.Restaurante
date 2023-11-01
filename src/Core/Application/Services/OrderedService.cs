@@ -2,7 +2,7 @@
 
 namespace Application.Services
 {
-    internal class OrderService : IOrderService
+    internal class OrderedService : IOrderService
     {
     }
 }

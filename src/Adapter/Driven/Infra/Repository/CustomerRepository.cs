@@ -15,8 +15,6 @@ namespace Infra.Repository
         private readonly IUnitOfWork unitOfWork;
         private DbSession _session;
 
-        private readonly string _connString = "";
-
         public CustomerRepository(ILogger<CustomerRepository> logger, DbSession session, IUnitOfWork unitOfWork)
         {
             this.logger = logger;
@@ -38,7 +36,7 @@ namespace Infra.Repository
             try
             {
                 unitOfWork.BeginTransaction();
-                var id = _session.Connection.ExecuteScalar<int>(query, parameter, _session.Transaction);
+                var id = _session.Connection.ExecuteScalar<long>(query, parameter, _session.Transaction);
                 unitOfWork.Commit();
 
                 return id;
@@ -59,23 +57,23 @@ namespace Infra.Repository
             return _session.Connection.Query<Customer>(query, parameter, _session.Transaction).FirstOrDefault();
         }
 
-        public void UpdateCustomer(long customerId, Customer customer)
-        {
-            var parameter = new
-            {
-                customerId,
-                customer.Name,
-                customer.Email,
-                customer.Cpf
-            };
+        //public void UpdateCustomer(long customerId, Customer customer)
+        //{
+        //    var parameter = new
+        //    {
+        //        customerId,
+        //        customer.Name,
+        //        customer.Email,
+        //        customer.Cpf
+        //    };
 
-            const string query = $"UPDATE Customer SET Name = @Name, CPF = @CPF, Email = @Email WHERE CustomerId = @CustomerId";
+        //    const string query = $"UPDATE Customer SET Name = @Name, CPF = @CPF, Email = @Email WHERE CustomerId = @CustomerId";
 
-            using (var sqlConnection = new SqlConnection(_connString))
-            {
-                sqlConnection.Execute(query, parameter);
+        //    using (var sqlConnection = new SqlConnection(_connString))
+        //    {
+        //        sqlConnection.Execute(query, parameter);
 
-            }
-        }
+        //    }
+        //}
     }
 }

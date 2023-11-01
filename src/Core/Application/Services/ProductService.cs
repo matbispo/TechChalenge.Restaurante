@@ -29,14 +29,14 @@ namespace Application.Services
             return _productRepository.GetProductByCategory(ProductCategoty);
         }
 
-        public Product? GetProductById(long productId)
-        {
-            return _productRepository.GetProductById(productId);
-        }
+        //public Product? GetProductById(long productId)
+        //{
+        //    return _productRepository.GetProductById(productId);
+        //}
 
-        public Product? UpdateProduct(Product product)
+        public void UpdateProduct(long productId, Product product)
         {
-            return _productRepository.UpdateProduct(product);
+            _productRepository.UpdateProduct(productId, product);
         }
     }
 }

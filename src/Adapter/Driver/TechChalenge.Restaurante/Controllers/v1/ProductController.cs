@@ -35,12 +35,28 @@ namespace TechChalenge.Restaurante.Controllers.v1
 
         }
 
-        [HttpGet("getproductbyid/{productId}")]
-        public IActionResult GetProductById(long productId)
+        //[HttpGet("{productId}")]
+        //public IActionResult GetProductById(long productId)
+        //{
+        //    try
+        //    {
+        //        var product = _productService.GetProductById(productId);
+
+        //        return Ok(product);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "");
+        //        return Problem(detail: "Erro ao cadastrar o produto. Contate o susporte.", statusCode: 500, title: "Erro Desconhecido");
+        //    }
+        //}
+
+        [HttpGet("{productCategory}")]
+        public IActionResult GetProductByCategory(ProductCategory productCategory)
         {
             try
             {
-                var product = _productService.GetProductById(productId);
+                var product = _productService.GetProductByCategory(productCategory);
 
                 return Ok(product);
             }
@@ -51,12 +67,12 @@ namespace TechChalenge.Restaurante.Controllers.v1
             }
         }
 
-        [HttpGet("getproductbycategory/{productId}")]
-        public IActionResult GetProductByCategory(ProductCategory ProductCategoty)
+        [HttpPut("{productId}")]
+        public IActionResult UpdateProduct(long productId, Product product)
         {
             try
             {
-                var product = _productService.GetProductByCategory(ProductCategoty);
+                _productService.UpdateProduct(productId, product);
 
                 return Ok(product);
             }
@@ -67,24 +83,8 @@ namespace TechChalenge.Restaurante.Controllers.v1
             }
         }
 
-        [HttpPut]
-        public IActionResult UpdateProduct([FromBody] Product product)
-        {
-            try
-            {
-                var productUpdated = _productService.UpdateProduct(product);
-
-                return Ok(productUpdated);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "");
-                return Problem(detail: "Erro ao cadastrar o produto. Contate o susporte.", statusCode: 500, title: "Erro Desconhecido");
-            }
-        }
-
-        [HttpDelete]
-        public IActionResult DeleteProduct([FromQuery] long productId)
+        [HttpDelete("{productId}")]
+        public IActionResult DeleteProduct(long productId)
         {
             try
             {

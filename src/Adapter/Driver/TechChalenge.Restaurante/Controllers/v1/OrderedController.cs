@@ -5,7 +5,7 @@ namespace TechChalenge.Restaurante.Controllers.v1
 {
     [Route("v1/api/order")]
     [ApiController]
-    public class OrderController : Controller
+    public class OrderedController : Controller
     {
         [HttpGet]
         public IActionResult ListOrders()
@@ -14,7 +14,7 @@ namespace TechChalenge.Restaurante.Controllers.v1
         }
 
         [HttpPost]
-        public IActionResult CreateOrder(Order order)
+        public IActionResult CreateOrder(Ordered order)
         {
             return Ok();
         }

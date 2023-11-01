@@ -8,10 +8,10 @@ namespace Domain.Services
     {
         void CreateProduct(Product product);
 
-        Product? GetProductById(long productId);
+        //Product? GetProductById(long productId);
 
         IList<Product?> GetProductByCategory(ProductCategory ProductCategoty);
-        Product? UpdateProduct(Product product);
+        void UpdateProduct(long productId, Product product);
 
         void DeleteProduct(long productId);
     }

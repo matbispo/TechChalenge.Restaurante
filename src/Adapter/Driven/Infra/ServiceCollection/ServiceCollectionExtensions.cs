@@ -12,7 +12,7 @@ namespace Infra.ServiceCollection
             services.AddScoped<DbSession>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderedRepository, OrderRepository>();
             services.AddScoped<IproductRepository, ProductRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
 
