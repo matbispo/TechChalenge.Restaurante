@@ -7,6 +7,6 @@ namespace Domain.Repositories
     {
         public string? CreateOrder(Ordered ordered);
 
-        public IList<Ordered> GetAll();
+        public IEnumerable<Ordered> GetAll();
     }
 }

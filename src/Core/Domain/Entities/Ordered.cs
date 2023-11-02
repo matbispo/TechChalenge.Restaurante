@@ -4,7 +4,7 @@ namespace Domain.Entities
 {
     public class Ordered
     {
-        public Guid OrderedId {  get; set; }
+        public string? OrderedId {  get; set; }
         public DateTime RequestDate { get; set; }
         public decimal TotalPrice { get; set; }
         public OrderStatus OrderStatus { get; set; }
@@ -12,9 +12,15 @@ namespace Domain.Entities
         public virtual Customer? Customer { get; set; }
         public virtual IList<Product> Products { get; set; }
 
+        public Ordered() 
+        {
+            Customer = new Customer();
+            Products = new List<Product>();
+        }
+
         public Ordered(long customerId)
         {
-            OrderedId = Guid.NewGuid();
+            OrderedId = Guid.NewGuid().ToString();
             RequestDate = DateTime.Now;
             OrderStatus = OrderStatus.Recebido;
             IsActive = true;

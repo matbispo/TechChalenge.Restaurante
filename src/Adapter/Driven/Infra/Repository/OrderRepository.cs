@@ -60,11 +60,11 @@ namespace Infra.Repository
 
         private void InsertOrderProduct(Ordered ordered)
         {
-            var productOrdered = new List<ProductOrdered>();
+            var productOrdered = new List<object>();
 
             foreach (var products in ordered.Products)
             {
-                productOrdered.Add(new ProductOrdered { OrderedId = ordered.OrderedId, ProductId = products.ProductId });
+                productOrdered.Add(new { OrderedId = ordered.OrderedId, ProductId = products.ProductId });
             }
 
             const string queryProductOrder = @"INSERT INTO ProductOrdered VALUES(@OrderedId, @ProductId)";
@@ -72,9 +72,51 @@ namespace Infra.Repository
             _session.Connection.Execute(queryProductOrder, productOrdered, _session.Transaction);
         }
 
-        public IList<Ordered> GetAll()
+        public IEnumerable<Ordered> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var sql = @"SELECT 
+	                            o.OrderedId, o.RequestDate, o.TotalPrice, o.OrderStatus, o.CustomerId, 
+	                            p.ProductId, p.Name, p.Price, p.Category, p.Description 
+                            FROM ProductOrdered AS po 
+                            INNER JOIN Ordered AS o 
+                            ON po.OrderedId = o.OrderedId 
+                            INNER JOIN Product AS p
+                            on po.ProductId = p.ProductId 
+                            WHERE o.IsActive = 1";
+                ;
+
+                var orders = _session.Connection.Query<Ordered, Product, Ordered>(sql, (order, product) => {
+                    order.Products.Add(product);
+                    return order;
+                }, splitOn: "ProductId");
+
+                var ordersResult = orders.GroupBy(p => p.OrderedId).Select(g =>
+                {
+                    var groupedOrder = g.First();
+                    groupedOrder.Products = g.Select(p => p.Products.Single()).ToList();
+                    return groupedOrder;
+                });
+
+                return ordersResult;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Erro ao consultar todos os pedidos");
+                throw;
+            }
+
+
+            //foreach (var post in result)
+            //{
+            //    Console.Write($"{post.Headline}: ");
+
+            //    foreach (var tag in post.Tags)
+            //    {
+            //        Console.Write($" {tag.TagName} ");
+            //    }
+            //}
         }
     }
 }

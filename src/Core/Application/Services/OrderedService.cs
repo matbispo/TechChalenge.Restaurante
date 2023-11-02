@@ -29,6 +29,7 @@ namespace Application.Services
         public IList<OrderedDtoOutput> GetAll()
         {
             var orders = _orderedRepository.GetAll();
+
             var ordersOutput = new List<OrderedDtoOutput>();
 
             foreach (var item in orders)
@@ -36,7 +37,7 @@ namespace Application.Services
                 ordersOutput.Add(new OrderedDtoOutput
                 {
                     CustomerId = item.Customer.CustomerId,
-                    OrderedId = item.OrderedId,
+                    OrderedId = new Guid(item?.OrderedId),
                     OrderStatus = item.OrderStatus,
                     RequestDate = item.RequestDate,
                     TotalPrice = item.TotalPrice,
