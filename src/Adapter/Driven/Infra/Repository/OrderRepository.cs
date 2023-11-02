@@ -49,7 +49,7 @@ namespace Infra.Repository
                 ordered.RequestDate,
                 ordered.TotalPrice,
                 ordered.OrderStatus,
-                ordered?.Customer?.CustomerId,
+                ordered?.CustomerId,
                 ordered?.IsActive
             };
 
@@ -106,17 +106,6 @@ namespace Infra.Repository
                 logger.LogError(ex, "Erro ao consultar todos os pedidos");
                 throw;
             }
-
-
-            //foreach (var post in result)
-            //{
-            //    Console.Write($"{post.Headline}: ");
-
-            //    foreach (var tag in post.Tags)
-            //    {
-            //        Console.Write($" {tag.TagName} ");
-            //    }
-            //}
         }
     }
 }

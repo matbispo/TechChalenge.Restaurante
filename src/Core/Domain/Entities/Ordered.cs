@@ -9,12 +9,12 @@ namespace Domain.Entities
         public decimal TotalPrice { get; set; }
         public OrderStatus OrderStatus { get; set; }
         public bool IsActive { get; set; }
-        public virtual Customer? Customer { get; set; }
+
+        public long CustomerId { get; set; }
         public virtual IList<Product> Products { get; set; }
 
         public Ordered() 
         {
-            Customer = new Customer();
             Products = new List<Product>();
         }
 
@@ -24,7 +24,7 @@ namespace Domain.Entities
             RequestDate = DateTime.Now;
             OrderStatus = OrderStatus.Recebido;
             IsActive = true;
-            Customer = new Customer { CustomerId = customerId};
+            CustomerId = customerId;
             Products = new List<Product>();
         }
 

@@ -36,7 +36,7 @@ namespace Application.Services
             {
                 ordersOutput.Add(new OrderedDtoOutput
                 {
-                    CustomerId = item.Customer.CustomerId,
+                    CustomerId = item.CustomerId,
                     OrderedId = new Guid(item?.OrderedId),
                     OrderStatus = item.OrderStatus,
                     RequestDate = item.RequestDate,
