@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace TechChalenge.Restaurante.Controllers.v1
 {
@@ -19,6 +20,8 @@ namespace TechChalenge.Restaurante.Controllers.v1
         }
 
         [HttpPost]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(long))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError)]
         public IActionResult CreateProduct([FromBody] Product product)
         {
             try
@@ -35,30 +38,22 @@ namespace TechChalenge.Restaurante.Controllers.v1
 
         }
 
-        //[HttpGet("{productId}")]
-        //public IActionResult GetProductById(long productId)
-        //{
-        //    try
-        //    {
-        //        var product = _productService.GetProductById(productId);
-
-        //        return Ok(product);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, "");
-        //        return Problem(detail: "Erro ao cadastrar o produto. Contate o susporte.", statusCode: 500, title: "Erro Desconhecido");
-        //    }
-        //}
-
         [HttpGet("{productCategory}")]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IList<Product>))]
+        [SwaggerResponse(StatusCodes.Status204NoContent)]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError)]
         public IActionResult GetProductByCategory(ProductCategory productCategory)
         {
             try
             {
-                var product = _productService.GetProductByCategory(productCategory);
+                var products = _productService.GetProductByCategory(productCategory);
 
-                return Ok(product);
+                if (products is null || !products.Any())
+                {
+                    return NoContent();
+                }
+
+                return Ok(products);
             }
             catch (Exception ex)
             {
@@ -68,6 +63,8 @@ namespace TechChalenge.Restaurante.Controllers.v1
         }
 
         [HttpPut("{productId}")]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(Product))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError)]
         public IActionResult UpdateProduct(long productId, Product product)
         {
             try
@@ -84,6 +81,8 @@ namespace TechChalenge.Restaurante.Controllers.v1
         }
 
         [HttpDelete("{productId}")]
+        [SwaggerResponse(StatusCodes.Status200OK)]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteProduct(long productId)
         {
             try

@@ -1,8 +1,5 @@
-using Microsoft.EntityFrameworkCore;
-using Infra.Context;
 using Application.ServiceCollection;
 using Infra.ServiceCollection;
-using System;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

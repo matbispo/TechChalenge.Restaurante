@@ -1,6 +1,8 @@
 ﻿using Application.Dtos;
 using Application.Services.Interfaces;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace TechChalenge.Restaurante.Controllers.v1
 {
@@ -22,6 +24,9 @@ namespace TechChalenge.Restaurante.Controllers.v1
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IList<OrderedDtoOutput>))]
+        [SwaggerResponse(StatusCodes.Status204NoContent)]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError)]
         public IActionResult ListOrders()
         {
             try
@@ -41,12 +46,10 @@ namespace TechChalenge.Restaurante.Controllers.v1
                 throw;
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="order"></param>
-        /// <returns></returns>
+
         [HttpPost]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(string))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError)]
         public IActionResult CreateOrder(OrderDtoInput order)
         {
             try

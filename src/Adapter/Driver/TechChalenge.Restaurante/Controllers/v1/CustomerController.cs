@@ -1,6 +1,7 @@
 ﻿using Application.Services.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace TechChalenge.Restaurante.Controllers.v1
 {
@@ -18,6 +19,8 @@ namespace TechChalenge.Restaurante.Controllers.v1
         }
 
         [HttpPost]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(long))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError)]
         public IActionResult CreateCustomer([FromBody] Customer customer)
         {
             try
@@ -34,6 +37,9 @@ namespace TechChalenge.Restaurante.Controllers.v1
         }
 
         [HttpGet("{customerCpf}")]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(Customer))]
+        [SwaggerResponse(StatusCodes.Status204NoContent)]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError)]
         public IActionResult GetCustomerByCpf(string customerCpf)
         {
             try
