@@ -12,32 +12,64 @@ namespace Infra.Repository
         private readonly IUnitOfWork unitOfWork;
         private DbSession _session;
 
-        public string? CreateOrder(Ordered ordered)
+        public OrderRepository(ILogger<OrderRepository> logger, IUnitOfWork unitOfWork, DbSession session)
         {
-            var parameter = new
+            this.logger = logger;
+            this.unitOfWork = unitOfWork;
+            _session = session;
+        }
+
+        public string? CreateOrder(Ordered ordered)
+        {           
+            try
+            {
+                unitOfWork.BeginTransaction();
+
+                InsertOrder(ordered);
+
+                InsertOrderProduct(ordered);
+
+                unitOfWork.Commit();
+
+                return ordered.OrderedId.ToString();
+            }
+            catch (Exception ex)
+            {
+                unitOfWork.Rollback();
+                logger.LogError(ex, $"Falha ao inserir o pedido: {ordered.OrderedId}");
+                throw;
+            }
+        }
+
+        private void InsertOrder(Ordered ordered)
+        {
+            var parameterOrder = new
             {
                 ordered.OrderedId,
                 ordered.RequestDate,
                 ordered.TotalPrice,
                 ordered.OrderStatus,
-                ordered?.Customer?.CustomerId
+                ordered?.Customer?.CustomerId,
+                ordered?.IsActive
             };
 
-            const string query = $"INSERT INTO Ordered OUTPUT INSERTED.CustomerId VALUES (@Name, @Email, @CPF)";
+            const string queryOrder = $"INSERT INTO Ordered VALUES (@OrderedId, @RequestDate, @TotalPrice, @OrderStatus, @CustomerId, @IsActive)";
 
-            try
-            {
-                unitOfWork.BeginTransaction();
-                var id = _session.Connection.ExecuteScalar<long>(query, parameter, _session.Transaction);
-                unitOfWork.Commit();
+            _session.Connection.Execute(queryOrder, parameterOrder, _session.Transaction);
+        }
 
-                return id;
-            }
-            catch (Exception ex)
+        private void InsertOrderProduct(Ordered ordered)
+        {
+            var productOrdered = new List<ProductOrdered>();
+
+            foreach (var products in ordered.Products)
             {
-                logger.LogError(ex, "");
-                throw;
+                productOrdered.Add(new ProductOrdered { OrderedId = ordered.OrderedId, ProductId = products.ProductId });
             }
+
+            const string queryProductOrder = @"INSERT INTO ProductOrdered VALUES(@OrderedId, @ProductId)";
+
+            _session.Connection.Execute(queryProductOrder, productOrdered, _session.Transaction);
         }
 
         public IList<Ordered> GetAll()

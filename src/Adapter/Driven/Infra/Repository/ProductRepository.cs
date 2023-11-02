@@ -85,5 +85,14 @@ namespace Infra.Repository
 
             _session.Connection.Execute(query, parameter, _session.Transaction);
         }
+
+        public IList<Product> GetProductsById(IList<long> ids)
+        {
+            var parameter = new { ProductIds = ids.ToArray() };
+
+            const string query = $"SELECT * FROM Product WHERE ProductId IN @ProductIds AND IsActive = 1";
+
+            return _session.Connection.Query<Product>(query, parameter, _session.Transaction).ToList();
+        }
     }
 }

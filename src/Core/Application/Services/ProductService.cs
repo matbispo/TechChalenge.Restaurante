@@ -14,9 +14,9 @@ namespace Application.Services
             _productRepository = productRepository;
         }
 
-        public void CreateProduct(Product product)
+        public long CreateProduct(Product product)
         {
-            _productRepository.CreateProduct(product);
+            return _productRepository.CreateProduct(product);
         }
 
         public void DeleteProduct(long productId)
@@ -28,11 +28,6 @@ namespace Application.Services
         {
             return _productRepository.GetProductByCategory(ProductCategoty);
         }
-
-        //public Product? GetProductById(long productId)
-        //{
-        //    return _productRepository.GetProductById(productId);
-        //}
 
         public void UpdateProduct(long productId, Product product)
         {

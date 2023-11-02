@@ -15,7 +15,7 @@ namespace Domain.Entities
         public Ordered(long customerId)
         {
             OrderedId = Guid.NewGuid();
-            RequestDate = new DateTime();
+            RequestDate = DateTime.Now;
             OrderStatus = OrderStatus.Recebido;
             IsActive = true;
             Customer = new Customer { CustomerId = customerId};

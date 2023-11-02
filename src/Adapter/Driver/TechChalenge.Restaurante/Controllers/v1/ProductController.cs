@@ -23,9 +23,9 @@ namespace TechChalenge.Restaurante.Controllers.v1
         {
             try
             {
-                _productService.CreateProduct(product);
+                var id = _productService.CreateProduct(product);
 
-                return Ok();
+                return Ok(id);
             }
             catch (Exception ex)
             {

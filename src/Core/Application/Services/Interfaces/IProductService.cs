@@ -5,9 +5,7 @@ namespace Application.Services.Interfaces
 {
     public interface IProductService
     {
-        void CreateProduct(Product product);
-
-        //Product? GetProductById(long productId);
+        long CreateProduct(Product product);
 
         IList<Product?> GetProductByCategory(ProductCategory ProductCategoty);
         void UpdateProduct(long productId, Product product);
