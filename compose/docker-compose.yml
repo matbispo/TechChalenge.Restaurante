@@ -1,0 +1,22 @@
+version: '3.6'
+
+services: 
+    db:
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment: 
+            MYSQL_ROOT_PASSWORD: TechChallenge#2023
+            MYSQL_DATABASE: mydb
+            MYSQL_USER: user
+            MYSQL_PASSWORD: user
+        ports:
+            - "3306:3306"
+    
+        volumes: 
+            - ./init:/docker-entrypoint-initdb.d
+        networks:
+            - tech_challenge    
+
+networks:
+  tech_challenge:

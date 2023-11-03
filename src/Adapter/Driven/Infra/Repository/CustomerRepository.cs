@@ -1,10 +1,8 @@
-﻿
-using Dapper;
+﻿using Dapper;
 using Domain.Entities;
 using Domain.Repositories;
 using Infra.Context;
 using Microsoft.Extensions.Logging;
-using System.Data.SqlClient;
 
 namespace Infra.Repository
 {
@@ -31,7 +29,8 @@ namespace Infra.Repository
                 customer.Cpf
             };
 
-            const string query = $"INSERT INTO Customer OUTPUT INSERTED.CustomerId VALUES (@Name, @Email, @CPF)";
+            const string query = @"INSERT INTO Customer(Name, Email, CPF) VALUES (@Name, @Email, @CPF);
+                                    SELECT LAST_INSERT_ID()";
 
             try
             {
@@ -56,24 +55,5 @@ namespace Infra.Repository
 
             return _session.Connection.Query<Customer>(query, parameter, _session.Transaction).FirstOrDefault();
         }
-
-        //public void UpdateCustomer(long customerId, Customer customer)
-        //{
-        //    var parameter = new
-        //    {
-        //        customerId,
-        //        customer.Name,
-        //        customer.Email,
-        //        customer.Cpf
-        //    };
-
-        //    const string query = $"UPDATE Customer SET Name = @Name, CPF = @CPF, Email = @Email WHERE CustomerId = @CustomerId";
-
-        //    using (var sqlConnection = new SqlConnection(_connString))
-        //    {
-        //        sqlConnection.Execute(query, parameter);
-
-        //    }
-        //}
     }
 }

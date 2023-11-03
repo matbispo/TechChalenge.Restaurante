@@ -30,8 +30,9 @@ namespace Infra.Repository
                 product.Category
             };
 
-            const string query = $"INSERT INTO Product (Name, Description, Price, Category, IsActive) OUTPUT INSERTED.ProductId " +
-                                         $"VALUES (@Name, @Description, @Price, @Category, 1)";
+            const string query = @"INSERT INTO Product (Name, Description, Price, Category, IsActive)
+                                        VALUES (@Name, @Description, @Price, @Category, 1);
+                                    SELECT LAST_INSERT_ID();";
 
             try
             {

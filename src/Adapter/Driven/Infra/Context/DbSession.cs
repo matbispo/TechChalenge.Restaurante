@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MySqlConnector;
 using System.Data;
 using System.Data.SqlClient;
+// using MySql.Data.MySqlClient;
 using static Dapper.SqlMapper;
 
 namespace Infra.Context
@@ -14,7 +16,7 @@ namespace Infra.Context
         public DbSession(IConfiguration config)
         {
             _id = Guid.NewGuid();
-            Connection = new SqlConnection(config.GetConnectionString("techChallengeDb"));
+            Connection = new MySqlConnection(config.GetConnectionString("techChallengeDb"));
             Connection.Open();
         }
 
