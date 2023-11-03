@@ -1,7 +1,11 @@
 version: '3.6'
 
+networks:
+  tech_challenge:
+
 services: 
     db:
+        container_name: mysql_tc
         image: mysql
         command: --default-authentication-plugin=mysql_native_password
         restart: always
@@ -16,7 +20,18 @@ services:
         volumes: 
             - ./init:/docker-entrypoint-initdb.d
         networks:
-            - tech_challenge    
+            - tech_challenge
+    api:
+        image: ${DOCKER_REGISTRY-}api
+        build:
+            context: .
+            dockerfile: ../TechChalenge.Restaurante/Dockerfile
+        ports:
+            - "15000:80"
+        networks:
+            - tech_challenge
+        depends_on:
+            - "db"
 
-networks:
-  tech_challenge:
+
+

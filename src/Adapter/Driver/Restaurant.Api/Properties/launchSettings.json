@@ -36,16 +36,23 @@
         "ASPNETCORE_URLS": "https://+:443;http://+:80"
       },
       "publishAllPorts": true,
-      "useSSL": true
-    }
-  },
-  "$schema": "https://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:43996",
-      "sslPort": 44327
+      "useSSL": false
+    },
+      "Docker Compose": {
+        "commandName": "DockerCompose",
+        "commandVersion": "1.0",
+        "serviceActions": {
+          "fiapblog.webapi": "StartDebugging"
+        }
+      }
+    },
+    "$schema": "https://json.schemastore.org/launchsettings.json",
+    "iisSettings": {
+      "windowsAuthentication": false,
+      "anonymousAuthentication": true,
+      "iisExpress": {
+        "applicationUrl": "http://localhost:43996",
+        "sslPort": 44327
+      }
     }
   }
-}
