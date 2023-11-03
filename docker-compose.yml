@@ -24,6 +24,7 @@ services:
             dockerfile: src/Adapter/Driver/Restaurant.Api/Dockerfile
         ports:
         - "5000:80"
+        - "5001:443" 
         depends_on:
         - db
         networks:
