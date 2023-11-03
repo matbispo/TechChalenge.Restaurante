@@ -32,7 +32,7 @@ namespace TechChalenge.Restaurante.Controllers.v1
             catch (Exception ex)
             {
                 _logger.LogError(ex, "");
-                return Problem();
+                return Problem(detail: ex.Message);
             }
         }
 

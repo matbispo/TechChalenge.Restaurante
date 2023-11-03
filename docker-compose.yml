@@ -1,10 +1,33 @@
 version: '3.4'
 
 services:
-  techchalenge.restaurante:
-    image: ${DOCKER_REGISTRY-}techchalengerestaurante
-    build:
-      context: .
-      dockerfile: src/Adapter/Driver/Restaurant.Api/Dockerfile
-    ports:
-      - "5000:80"
+    db:
+        container_name: mysql_tech_challenge
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment: 
+            MYSQL_ROOT_PASSWORD: TechChallenge#2023
+            MYSQL_DATABASE: mydb
+            MYSQL_USER: user
+            MYSQL_PASSWORD: user
+        ports:
+            - "3306:3306" 
+        volumes: 
+            - ./init:/docker-entrypoint-initdb.d
+        networks:
+            - tech-challenge
+    techchalenge.restaurante:
+        image: ${DOCKER_REGISTRY-}techchalengerestaurante
+        build:
+            context: .
+            dockerfile: src/Adapter/Driver/Restaurant.Api/Dockerfile
+        ports:
+        - "5000:80"
+        depends_on:
+        - db
+        networks:
+        - tech-challenge
+networks:
+  tech-challenge:
+      name: tech-challenge
