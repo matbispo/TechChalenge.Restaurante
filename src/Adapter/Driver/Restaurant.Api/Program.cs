@@ -18,11 +18,6 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors();
 
-//app.UseCors(x => x.AllowAnyOrigin()
-//                .AllowAnyHeader()
-//                .AllowAnyMethod()
-//            );
-
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .WriteTo.Console()
