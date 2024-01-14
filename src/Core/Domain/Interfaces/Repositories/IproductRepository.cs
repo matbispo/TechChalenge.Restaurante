@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.ValueObjects;
 
-namespace Domain.Repositories
+namespace Domain.Interfaces.Repositories
 {
     public interface IproductRepository
     {
@@ -13,6 +13,6 @@ namespace Domain.Repositories
 
         void DeleteProduct(long productId);
 
-        IList<Product> GetProductsById(IList<long>ids);
+        IList<Product> GetProductsById(IList<long> ids);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.ValueObjects;
 
-namespace Application.Dtos
+namespace Application.Presenters.Dtos
 {
     public record OrderedDtoOutput
     {

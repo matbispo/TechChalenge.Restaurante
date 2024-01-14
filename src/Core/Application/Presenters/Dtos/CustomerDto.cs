@@ -1,5 +1,4 @@
-﻿
-namespace Application.Dto
+﻿namespace Application.Presenters.Dtos
 {
     public class CustomerDto
     {

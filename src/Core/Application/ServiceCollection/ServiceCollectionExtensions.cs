@@ -1,5 +1,5 @@
-﻿using Application.Services;
-using Application.Services.Interfaces;
+﻿using Application.UseCases.Services;
+using Application.UseCases.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.ServiceCollection

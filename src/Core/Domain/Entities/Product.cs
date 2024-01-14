@@ -1,7 +1,7 @@
 ﻿
 using Domain.ValueObjects;
 
-namespace Domain.Entities
+namespace Core.Domain.Entities
 {
     public record Product
     {

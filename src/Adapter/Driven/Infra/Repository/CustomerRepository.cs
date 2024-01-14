@@ -1,6 +1,6 @@
 ﻿using Dapper;
-using Domain.Entities;
-using Domain.Repositories;
+using Core.Domain.Entities;
+using Domain.Interfaces.Repositories;
 using Infra.Context;
 using Microsoft.Extensions.Logging;
 

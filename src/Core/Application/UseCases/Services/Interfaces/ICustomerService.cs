@@ -1,6 +1,6 @@
-﻿using Domain.Entities;
+﻿using Core.Domain.Entities;
 
-namespace Application.Services.Interfaces
+namespace Application.UseCases.Services.Interfaces
 {
     public interface ICustomerService
     {

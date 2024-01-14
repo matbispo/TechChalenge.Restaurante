@@ -1,5 +1,6 @@
-﻿using Application.Services.Interfaces;
-using Domain.Entities;
+﻿using Application.UseCases.Customer.CreateCustomer;
+using Application.UseCases.Customer.GetCustome;
+using Core.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -10,12 +11,14 @@ namespace TechChalenge.Restaurante.Controllers.v1
     public class CustomerController : Controller
     {
         private readonly ILogger<CustomerController> _logger;
-        private readonly ICustomerService _customerService;
+        private readonly IGetCustomerUseCase _getCustomerUseCase;
+        private readonly ICreateCustomerUseCase _createCustomerUseCase;
 
-        public CustomerController(ILogger<CustomerController> logger, ICustomerService customerService)
+        public CustomerController(ILogger<CustomerController> logger, IGetCustomerUseCase getCustomerUseCase, ICreateCustomerUseCase createCustomerUseCase)
         {
             _logger = logger;
-            _customerService = customerService;
+            _getCustomerUseCase = getCustomerUseCase;
+            _createCustomerUseCase = createCustomerUseCase;
         }
 
         [HttpPost]
@@ -25,7 +28,7 @@ namespace TechChalenge.Restaurante.Controllers.v1
         {
             try
             {
-                var id = _customerService.CreateCustomer(customer);
+                var id = _createCustomerUseCase.CreateCustomer(customer);
 
                 return Ok(new { CustomerId = id});
             }
@@ -44,7 +47,7 @@ namespace TechChalenge.Restaurante.Controllers.v1
         {
             try
             {
-                var customer = _customerService.GetCustomerByCpf(customerCpf);
+                var customer = _getCustomerUseCase.GetCustomerByCpf(customerCpf);
 
                 if (customer is null)
                     return NoContent();

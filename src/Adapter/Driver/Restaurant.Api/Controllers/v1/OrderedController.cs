@@ -1,5 +1,5 @@
-﻿using Application.Dtos;
-using Application.Services.Interfaces;
+﻿using Application.Presenters.Dtos;
+using Application.UseCases.Services.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;

@@ -1,9 +1,9 @@
-﻿using Application.Services.Interfaces;
+﻿using Application.UseCases.Services.Interfaces;
 using Domain.Entities;
-using Domain.Repositories;
+using Domain.Interfaces.Repositories;
 using Domain.ValueObjects;
 
-namespace Application.Services
+namespace Application.UseCases.Services
 {
     internal class ProductService : IProductService
     {

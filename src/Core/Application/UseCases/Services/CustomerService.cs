@@ -1,8 +1,8 @@
-﻿using Application.Services.Interfaces;
-using Domain.Entities;
-using Domain.Repositories;
+﻿using Application.UseCases.Services.Interfaces;
+using Core.Domain.Entities;
+using Domain.Interfaces.Repositories;
 
-namespace Application.Services
+namespace Application.UseCases.Services
 {
     internal class CustomerService : ICustomerService
     {

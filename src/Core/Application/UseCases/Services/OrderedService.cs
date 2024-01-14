@@ -1,9 +1,9 @@
-﻿using Application.Dtos;
-using Application.Services.Interfaces;
+﻿using Application.Presenters.Dtos;
+using Application.UseCases.Services.Interfaces;
 using Domain.Entities;
-using Domain.Repositories;
+using Domain.Interfaces.Repositories;
 
-namespace Application.Services
+namespace Application.UseCases.Services
 {
     internal class OrderedService : IOrderService
     {

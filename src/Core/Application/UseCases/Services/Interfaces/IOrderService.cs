@@ -1,6 +1,6 @@
-﻿using Application.Dtos;
+﻿using Application.Presenters.Dtos;
 
-namespace Application.Services.Interfaces
+namespace Application.UseCases.Services.Interfaces
 {
     public interface IOrderService
     {
