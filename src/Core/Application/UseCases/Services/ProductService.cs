@@ -1,5 +1,5 @@
 ﻿using Application.UseCases.Services.Interfaces;
-using Domain.Entities;
+using Entity = Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.ValueObjects;
 
@@ -14,7 +14,7 @@ namespace Application.UseCases.Services
             _productRepository = productRepository;
         }
 
-        public long CreateProduct(Product product)
+        public long CreateProduct(Entity.Product product)
         {
             return _productRepository.CreateProduct(product);
         }
@@ -24,12 +24,12 @@ namespace Application.UseCases.Services
             _productRepository.DeleteProduct(productId);
         }
 
-        public IList<Product?> GetProductByCategory(ProductCategory ProductCategoty)
+        public IList<Entity.Product?> GetProductByCategory(ProductCategory ProductCategoty)
         {
             return _productRepository.GetProductByCategory(ProductCategoty);
         }
 
-        public void UpdateProduct(long productId, Product product)
+        public void UpdateProduct(long productId, Entity.Product product)
         {
             _productRepository.UpdateProduct(productId, product);
         }

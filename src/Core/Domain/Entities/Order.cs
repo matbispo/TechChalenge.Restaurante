@@ -1,8 +1,8 @@
 ﻿using Domain.ValueObjects;
 
-namespace Core.Domain.Entities
+namespace Domain.Entities
 {
-    public class Ordered
+    public class Order
     {
         public string? OrderedId {  get; set; }
         public DateTime RequestDate { get; set; }
@@ -13,12 +13,12 @@ namespace Core.Domain.Entities
         public long CustomerId { get; set; }
         public virtual IList<Product> Products { get; set; }
 
-        public Ordered() 
+        public Order() 
         {
             Products = new List<Product>();
         }
 
-        public Ordered(long customerId)
+        public Order(long customerId)
         {
             OrderedId = Guid.NewGuid().ToString();
             RequestDate = DateTime.Now;

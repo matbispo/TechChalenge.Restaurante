@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Infra.Repository
 {
-    internal class OrderRepository : IOrderedRepository
+    internal class OrderRepository : IOrderRepository
     {
         private readonly ILogger<OrderRepository> logger;
         private readonly IUnitOfWork unitOfWork;

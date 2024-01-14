@@ -1,6 +1,6 @@
 ﻿using Application.Presenters.Dtos;
-using Application.UseCases.Services.Interfaces;
-using Domain.Entities;
+using Application.UseCases.Order.CreateOrder;
+using Application.UseCases.Order.GetAllOrders;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -8,14 +8,14 @@ namespace TechChalenge.Restaurante.Controllers.v1
 {
     [Route("v1/api/order")]
     [ApiController]
-    public class OrderedController : Controller
+    public class OrderController : Controller
     {
-        private readonly IOrderService _orderService;
-        private readonly ILogger<OrderedController> _logger;
+    //    private readonly IGetAllOrdersUseCase _getAllOrdersUseCase;
+        private readonly ILogger<OrderController> _logger;
 
-        public OrderedController(IOrderService orderService, ILogger<OrderedController> logger)
+        public OrderController(IGetAllOrdersUseCase getAllOrdersUseCase, ILogger<OrderController> logger)
         {
-            _orderService = orderService;
+        //    _getAllOrdersUseCase = getAllOrdersUseCase;
             _logger = logger;
         }
 
@@ -27,11 +27,11 @@ namespace TechChalenge.Restaurante.Controllers.v1
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IList<OrderedDtoOutput>))]
         [SwaggerResponse(StatusCodes.Status204NoContent)]
         [SwaggerResponse(StatusCodes.Status500InternalServerError)]
-        public IActionResult ListOrders()
+        public IActionResult ListOrders([FromServices] IGetAllOrdersUseCase _getAllOrdersUseCase)
         {
             try
             {
-                var orders = _orderService.GetAll();
+                var orders = _getAllOrdersUseCase.GetAll();
 
                 if (orders is null)
                 {
@@ -50,11 +50,11 @@ namespace TechChalenge.Restaurante.Controllers.v1
         [HttpPost]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError)]
-        public IActionResult CreateOrder(OrderDtoInput order)
+        public IActionResult CreateOrder([FromServices] ICreateOrderUseCase _createOrderUseCase, OrderDtoInput order)
         {
             try
             {
-                var id = _orderService.CreateOrder(order);
+                var id = _createOrderUseCase.CreateOrder(order);
                 return Ok(id);
             }
             catch (Exception)
