@@ -14,11 +14,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\Product\CreateProduct\" />
-    <Folder Include="UseCases\Product\DeleteProduct\" />
-    <Folder Include="UseCases\Product\GetProductByCategory\" />
-    <Folder Include="UseCases\Product\UpdateProduct\" />
-  </ItemGroup>
-
 </Project>

@@ -19,7 +19,7 @@ namespace Infra.Repository
             _session = session;
         }
 
-        public string? CreateOrder(Ordered ordered)
+        public string? CreateOrder(Order ordered)
         {           
             try
             {
@@ -41,7 +41,7 @@ namespace Infra.Repository
             }
         }
 
-        private void InsertOrder(Ordered ordered)
+        private void InsertOrder(Order ordered)
         {
             var parameterOrder = new
             {
@@ -58,7 +58,7 @@ namespace Infra.Repository
             _session.Connection.Execute(queryOrder, parameterOrder, _session.Transaction);
         }
 
-        private void InsertOrderProduct(Ordered ordered)
+        private void InsertOrderProduct(Order ordered)
         {
             var productOrdered = new List<object>();
 
@@ -72,7 +72,7 @@ namespace Infra.Repository
             _session.Connection.Execute(queryProductOrder, productOrdered, _session.Transaction);
         }
 
-        public IEnumerable<Ordered> GetAll()
+        public IEnumerable<Order> GetAll()
         {
             try
             {
@@ -87,7 +87,7 @@ namespace Infra.Repository
                             WHERE o.IsActive = 1";
                 ;
 
-                var orders = _session.Connection.Query<Ordered, Product, Ordered>(sql, (order, product) => {
+                var orders = _session.Connection.Query<Order, Product, Order>(sql, (order, product) => {
                     order.Products.Add(product);
                     return order;
                 }, splitOn: "ProductId");

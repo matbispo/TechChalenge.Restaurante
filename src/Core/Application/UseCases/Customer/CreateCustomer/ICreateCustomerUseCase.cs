@@ -1,9 +1,8 @@
-﻿using Core.Domain.Entities;
-
+﻿
 namespace Application.UseCases.Customer.CreateCustomer
 {
     public interface ICreateCustomerUseCase
     {
-        long CreateCustomer(Customer customer);
+        long CreateCustomer(Domain.Entities.Customer customer);
     }
 }

@@ -1,20 +1,22 @@
 ﻿
+using Domain.Interfaces.Gateways;
+
 namespace Application.UseCases.Customer.CreateCustomer
 {
     internal class CreateCustomerUseCase : ICreateCustomerUseCase
     {
-        private readonly ICreateCustomerGateway createCustomerGateway;
+        private readonly ICreateCustomerGateway _createCustomerGateway;
 
         public CreateCustomerUseCase(ICreateCustomerGateway createCustomerGateway)
         {
-            this.createCustomerGateway = createCustomerGateway;
+            _createCustomerGateway = createCustomerGateway;
         }
 
-        public long CreateCustomer(Customer customer)
+        public long CreateCustomer(Domain.Entities.Customer customer)
         {
             // validar usuario
 
-            return createCustomerGateway.CreateCustomer(customer);
+            return _createCustomerGateway.CreateCustomer(customer);
         }
     }
 }

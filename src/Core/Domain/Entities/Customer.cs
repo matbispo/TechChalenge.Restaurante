@@ -1,6 +1,6 @@
 ﻿using Domain.ValueObjects;
 
-namespace Core.Domain.Entities
+namespace Domain.Entities
 {
     public record Customer
     {

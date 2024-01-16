@@ -1,6 +1,6 @@
 ﻿using Application.UseCases.Customer.CreateCustomer;
 using Application.UseCases.Customer.GetCustome;
-using Core.Domain.Entities;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -11,20 +11,16 @@ namespace TechChalenge.Restaurante.Controllers.v1
     public class CustomerController : Controller
     {
         private readonly ILogger<CustomerController> _logger;
-        private readonly IGetCustomerUseCase _getCustomerUseCase;
-        private readonly ICreateCustomerUseCase _createCustomerUseCase;
 
-        public CustomerController(ILogger<CustomerController> logger, IGetCustomerUseCase getCustomerUseCase, ICreateCustomerUseCase createCustomerUseCase)
+        public CustomerController(ILogger<CustomerController> logger)
         {
             _logger = logger;
-            _getCustomerUseCase = getCustomerUseCase;
-            _createCustomerUseCase = createCustomerUseCase;
         }
 
         [HttpPost]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(long))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError)]
-        public IActionResult CreateCustomer([FromBody] Customer customer)
+        public IActionResult CreateCustomer([FromServices]ICreateCustomerUseCase _createCustomerUseCase, [FromBody] Customer customer)
         {
             try
             {
@@ -43,7 +39,7 @@ namespace TechChalenge.Restaurante.Controllers.v1
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(Customer))]
         [SwaggerResponse(StatusCodes.Status204NoContent)]
         [SwaggerResponse(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetCustomerByCpf(string customerCpf)
+        public IActionResult GetCustomerByCpf([FromServices] IGetCustomerUseCase _getCustomerUseCase, string customerCpf)
         {
             try
             {

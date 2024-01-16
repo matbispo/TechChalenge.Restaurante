@@ -1,6 +1,5 @@
 ﻿using Application.Presenters.Dtos;
 using Application.UseCases.Services.Interfaces;
-using Core.Domain.Entities;
 using Domain.Interfaces.Repositories;
 
 namespace Application.UseCases.Services
@@ -17,9 +16,14 @@ namespace Application.UseCases.Services
             _productRepository = productRepository;
         }
 
-
-
-        
+        public string? CreateOrder(OrderDtoInput ordered)
+        {
+            throw new NotImplementedException();
         }
-    }
+
+        public IList<OrderedDtoOutput> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+    }   
 }

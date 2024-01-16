@@ -1,12 +1,20 @@
-﻿using Core.Domain.Entities;
+﻿
+using Domain.Interfaces.Gateways;
 
 namespace Application.UseCases.Customer.GetCustome
 {
     public class GetCustomerUseCase : IGetCustomerUseCase
     {
-        public Customer GetCustomerByCpf(string customerCpf)
+        private readonly IGetCustomerByCPFGateway _getCustomerByCPFGateway;
+
+        public GetCustomerUseCase(IGetCustomerByCPFGateway getCustomerByCPFGateway)
         {
-            throw new NotImplementedException();
+            _getCustomerByCPFGateway = getCustomerByCPFGateway;
+        }
+
+        public Domain.Entities.Customer GetCustomerByCpf(string customerCpf)
+        {
+            return _getCustomerByCPFGateway.GetCustomerByCpf(customerCpf);
         }
     }
 }

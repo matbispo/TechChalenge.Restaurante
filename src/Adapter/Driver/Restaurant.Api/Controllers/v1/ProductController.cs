@@ -1,4 +1,7 @@
-﻿using Application.UseCases.Services.Interfaces;
+﻿using Application.UseCases.Product.CreateProduct;
+using Application.UseCases.Product.DeleteProduct;
+using Application.UseCases.Product.GetProductByCategory;
+using Application.UseCases.Product.UpdateProduct;
 using Domain.Entities;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
@@ -11,22 +14,20 @@ namespace TechChalenge.Restaurante.Controllers.v1
     public class ProductController : Controller
     {
         private readonly ILogger<ProductController> _logger;
-        private readonly IProductService _productService;
 
-        public ProductController(ILogger<ProductController> logger, IProductService productService)
+        public ProductController(ILogger<ProductController> logger)
         {
             _logger = logger;
-            _productService = productService;
         }
 
         [HttpPost]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(long))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError)]
-        public IActionResult CreateProduct([FromBody] Product product)
+        public IActionResult CreateProduct([FromServices] ICreateProductUseCase createProductUseCase, [FromBody] Product product)
         {
             try
             {
-                var id = _productService.CreateProduct(product);
+                var id = createProductUseCase.CreateProduct(product);
 
                 return Ok(id);
             }
@@ -42,11 +43,11 @@ namespace TechChalenge.Restaurante.Controllers.v1
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IList<Product>))]
         [SwaggerResponse(StatusCodes.Status204NoContent)]
         [SwaggerResponse(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetProductByCategory(ProductCategory productCategory)
+        public IActionResult GetProductByCategory([FromServices] IGetProductByCategoryUseCase getProductByCategoryUseCase, ProductCategory productCategory)
         {
             try
             {
-                var products = _productService.GetProductByCategory(productCategory);
+                var products = getProductByCategoryUseCase.GetProductByCategory(productCategory);
 
                 if (products is null || !products.Any())
                 {
@@ -65,11 +66,11 @@ namespace TechChalenge.Restaurante.Controllers.v1
         [HttpPut("{productId}")]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(Product))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError)]
-        public IActionResult UpdateProduct(long productId, Product product)
+        public IActionResult UpdateProduct([FromServices] IUpdateProductUseCase updateProductUseCase, long productId, Product product)
         {
             try
             {
-                _productService.UpdateProduct(productId, product);
+                updateProductUseCase.UpdateProduct(productId, product);
 
                 return Ok(product);
             }
@@ -83,11 +84,11 @@ namespace TechChalenge.Restaurante.Controllers.v1
         [HttpDelete("{productId}")]
         [SwaggerResponse(StatusCodes.Status200OK)]
         [SwaggerResponse(StatusCodes.Status500InternalServerError)]
-        public IActionResult DeleteProduct(long productId)
+        public IActionResult DeleteProduct([FromServices] IDeleteProductUseCase deleteProductUseCase, long productId)
         {
             try
             {
-                _productService.DeleteProduct(productId);
+                deleteProductUseCase.DeleteProduct(productId);
 
                 return Ok();
             }

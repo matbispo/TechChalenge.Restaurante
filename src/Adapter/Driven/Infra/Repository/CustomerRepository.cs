@@ -1,8 +1,8 @@
 ﻿using Dapper;
-using Core.Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Infra.Context;
 using Microsoft.Extensions.Logging;
+using Domain.Entities;
 
 namespace Infra.Repository
 {
