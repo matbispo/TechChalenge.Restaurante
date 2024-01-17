@@ -14,7 +14,7 @@ namespace Application.UseCases.Product.GetProductByCategory
 
         public IList<Domain.Entities.Product?> GetProductByCategory(ProductCategory ProductCategoty)
         {
-            return getProductByCategotyGateway.Get();
+            return getProductByCategotyGateway.GetProductByCategory(ProductCategoty);
         }
     }
 }

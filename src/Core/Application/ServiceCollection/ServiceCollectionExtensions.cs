@@ -1,5 +1,11 @@
-﻿using Application.UseCases.Services;
-using Application.UseCases.Services.Interfaces;
+﻿using Application.UseCases.Customer.CreateCustomer;
+using Application.UseCases.Customer.GetCustome;
+using Application.UseCases.Order.CreateOrder;
+using Application.UseCases.Order.GetAllOrders;
+using Application.UseCases.Product.CreateProduct;
+using Application.UseCases.Product.DeleteProduct;
+using Application.UseCases.Product.GetProductByCategory;
+using Application.UseCases.Product.UpdateProduct;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.ServiceCollection
@@ -8,9 +14,14 @@ namespace Application.ServiceCollection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped<IOrderService, OrderService>();
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<ICreateCustomerUseCase, CreateCustomerUseCase>();
+            services.AddScoped<IGetCustomerUseCase, GetCustomerUseCase>();
+            services.AddScoped<ICreateOrderUseCase, CreateOrderUseCase>();
+            services.AddScoped<IGetAllOrdersUseCase, GetAllOrdersUseCase>();
+            services.AddScoped<ICreateProductUseCase, CreateProductUseCase>();
+            services.AddScoped<IDeleteProductUseCase, DeleteProductUseCase>();
+            services.AddScoped<IGetProductByCategoryUseCase, GetProductByCategoryUseCase>();
+            services.AddScoped<IUpdateProductUseCase, UpdateProductUseCase>();
 
             return services;
         }

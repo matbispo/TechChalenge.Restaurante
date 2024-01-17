@@ -1,5 +1,6 @@
 using Application.ServiceCollection;
 using Infra.ServiceCollection;
+using Gateway.ServiceCollection;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using Serilog;
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddApplicationServices();
+builder.Services.AddGatewayServices();
 builder.Services.AddRepositoryServices();
 
 builder.Services.AddControllers();
