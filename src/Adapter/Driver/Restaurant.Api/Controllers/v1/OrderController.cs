@@ -1,6 +1,9 @@
 ﻿using Application.Presenters.Dtos;
 using Application.UseCases.Order.CreateOrder;
 using Application.UseCases.Order.GetAllOrders;
+using Application.UseCases.Order.UpdatePaymentOrderStatus;
+using Domain.Entities;
+using Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -40,10 +43,9 @@ namespace TechChalenge.Restaurante.Controllers.v1
 
                 return Ok(orders);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return Problem(detail: "Erro ao consultar os pedidos. Contate o susporte.", statusCode: 500, title: "Erro Desconhecido");
             }
         }
 
@@ -56,6 +58,42 @@ namespace TechChalenge.Restaurante.Controllers.v1
             {
                 var id = _createOrderUseCase.CreateOrder(order);
                 return Ok(id);
+            }
+            catch (Exception ex)
+            {
+                return Problem(detail: "Erro ao cadastrar novo pedido. Contate o susporte.", statusCode: 500, title: "Erro Desconhecido");
+            }
+        }
+
+        [HttpPut("{orderId}")]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(Product))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError)]
+        public IActionResult UpdateOrderStatus([FromServices] IUpdateOrderStatusUseCase updateOrderStatusUseCase, string orderId, OrderStatus orderStatus)
+        {
+            try
+            {
+                updateOrderStatusUseCase.Execute(orderId, orderStatus);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Erro ao atualizar o status do pedido: {orderId}");
+                return Problem(detail: "Erro ao atualizar o status do pedido. Contate o susporte.", statusCode: 500, title: "Erro Desconhecido");
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetOrderPaymentStatus([FromServices] IGetOrderPaymentStatusUseCase getOrderPaymentStatusUseCase, string orderId)
+        {
+            try
+            {
+                var status = getOrderPaymentStatusUseCase.Select();
+
+                if (status is not null)
+                {
+                    return Ok(status);
+                }
+                return NoContent();
             }
             catch (Exception)
             {

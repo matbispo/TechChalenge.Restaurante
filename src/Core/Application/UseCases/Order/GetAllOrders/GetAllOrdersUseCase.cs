@@ -23,7 +23,7 @@ namespace Application.UseCases.Order.GetAllOrders
                 ordersOutput.Add(new OrderedDtoOutput
                 {
                     CustomerId = item.CustomerId,
-                    OrderedId = new Guid(item?.OrderedId),
+                    OrderId = new Guid(item?.OrderId),
                     OrderStatus = item.OrderStatus,
                     RequestDate = item.RequestDate,
                     TotalPrice = item.TotalPrice,

@@ -66,7 +66,7 @@ namespace TechChalenge.Restaurante.Controllers.v1
         [HttpPut("{productId}")]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(Product))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError)]
-        public IActionResult UpdateProduct([FromServices] IUpdateProductUseCase updateProductUseCase, long productId, Product product)
+        public IActionResult UpdateProduct([FromServices] IUpdateProductUseCase updateProductUseCase, long productId, [FromBody] Product product)
         {
             try
             {

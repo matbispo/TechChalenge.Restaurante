@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
+using Domain.ValueObjects;
 using Infra.Context;
 using Microsoft.Extensions.Logging;
 
@@ -31,12 +32,12 @@ namespace Infra.Repository
 
                 unitOfWork.Commit();
 
-                return ordered.OrderedId.ToString();
+                return ordered.OrderId.ToString();
             }
             catch (Exception ex)
             {
                 unitOfWork.Rollback();
-                logger.LogError(ex, $"Falha ao inserir o pedido: {ordered.OrderedId}");
+                logger.LogError(ex, $"Falha ao inserir o pedido: {ordered.OrderId}");
                 throw;
             }
         }
@@ -45,7 +46,7 @@ namespace Infra.Repository
         {
             var parameterOrder = new
             {
-                ordered.OrderedId,
+                ordered.OrderId,
                 ordered.RequestDate,
                 ordered.TotalPrice,
                 ordered.OrderStatus,
@@ -64,7 +65,7 @@ namespace Infra.Repository
 
             foreach (var products in ordered.Products)
             {
-                productOrdered.Add(new { OrderedId = ordered.OrderedId, ProductId = products.ProductId });
+                productOrdered.Add(new { OrderedId = ordered.OrderId, ProductId = products.ProductId });
             }
 
             const string queryProductOrder = @"INSERT INTO ProductOrdered VALUES(@OrderedId, @ProductId)";
@@ -92,7 +93,7 @@ namespace Infra.Repository
                     return order;
                 }, splitOn: "ProductId");
 
-                var ordersResult = orders.GroupBy(p => p.OrderedId).Select(g =>
+                var ordersResult = orders.GroupBy(p => p.OrderId).Select(g =>
                 {
                     var groupedOrder = g.First();
                     groupedOrder.Products = g.Select(p => p.Products.Single()).ToList();
@@ -106,6 +107,23 @@ namespace Infra.Repository
                 logger.LogError(ex, "Erro ao consultar todos os pedidos");
                 throw;
             }
+        }
+
+        public void UpdateOrderStatus(string orderId, OrderStatus orderStatus)
+        {
+            var parameterOrder = new
+            {
+                ordered.OrderId,
+                ordered.RequestDate,
+                ordered.TotalPrice,
+                ordered.OrderStatus,
+                ordered?.CustomerId,
+                ordered?.IsActive
+            };
+
+            const string queryOrder = $"Update Ordered SET @OrderStatus =  (@OrderedId, @RequestDate, @TotalPrice, , @CustomerId, @IsActive)";
+
+            _session.Connection.Execute(queryOrder, parameterOrder, _session.Transaction);
         }
     }
 }

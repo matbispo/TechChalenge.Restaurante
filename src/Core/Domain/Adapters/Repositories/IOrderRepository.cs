@@ -1,11 +1,14 @@
 ﻿using Domain.Entities;
+using Domain.ValueObjects;
 
 namespace Domain.Interfaces.Repositories
 {
     public interface IOrderRepository
     {
-        public string? CreateOrder(Order ordered);
+        string? CreateOrder(Order ordered);
 
-        public IEnumerable<Order> GetAll();
+        IEnumerable<Order> GetAll();
+
+        void UpdateOrderStatus(string orderId, OrderStatus orderStatus);
     }
 }
