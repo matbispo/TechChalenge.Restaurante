@@ -113,17 +113,22 @@ namespace Infra.Repository
         {
             var parameterOrder = new
             {
-                ordered.OrderId,
-                ordered.RequestDate,
-                ordered.TotalPrice,
-                ordered.OrderStatus,
-                ordered?.CustomerId,
-                ordered?.IsActive
+                orderId,
+                orderStatus,
             };
 
-            const string queryOrder = $"Update Ordered SET @OrderStatus =  (@OrderedId, @RequestDate, @TotalPrice, , @CustomerId, @IsActive)";
+            const string queryOrder = $"UPDATE Ordered SET OrderStatus = orderStatus WHERE OrderId = @orderId;";
 
             _session.Connection.Execute(queryOrder, parameterOrder, _session.Transaction);
+        }
+
+        public OrderStatus GetOrderPaymentStatus(string orderId)
+        {
+            var parameter = new { OrderId = orderId };
+
+            const string query = $"SELECT OrderStatus FROM Order WHERE OrderId = @OrderId;";
+
+            return _session.Connection.Query<OrderStatus>(query, parameter, _session.Transaction).FirstOrDefault();
         }
     }
 }

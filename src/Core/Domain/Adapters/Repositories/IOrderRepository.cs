@@ -10,5 +10,7 @@ namespace Domain.Interfaces.Repositories
         IEnumerable<Order> GetAll();
 
         void UpdateOrderStatus(string orderId, OrderStatus orderStatus);
+
+        OrderStatus GetOrderPaymentStatus(string orderId);
     }
 }

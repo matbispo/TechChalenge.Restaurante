@@ -1,6 +1,7 @@
 ﻿using Application.Presenters.Dtos;
 using Application.UseCases.Order.CreateOrder;
 using Application.UseCases.Order.GetAllOrders;
+using Application.UseCases.Order.GetOrderPaymentStatus;
 using Application.UseCases.Order.UpdatePaymentOrderStatus;
 using Domain.Entities;
 using Domain.ValueObjects;
@@ -87,7 +88,7 @@ namespace TechChalenge.Restaurante.Controllers.v1
         {
             try
             {
-                var status = getOrderPaymentStatusUseCase.Select();
+                var status = getOrderPaymentStatusUseCase.Execute(orderId);
 
                 if (status is not null)
                 {
